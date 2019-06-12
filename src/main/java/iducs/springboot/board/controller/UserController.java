@@ -36,6 +36,10 @@ public class UserController {
 	}	
 	@GetMapping("")
 	public String getAllUser(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/users/login-form"; // 로그인창으로
+		}
 		model.addAttribute("users", userService.getUsers());
 		return "/users/list";
 	}	
